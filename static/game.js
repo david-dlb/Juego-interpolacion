@@ -16,7 +16,7 @@ let ph = 0
 
 // posicion de las manos
 let phx = 250
-let phy = 400
+let phy = 700
 
 
 // iniciar interpolacion
@@ -25,7 +25,7 @@ const initInterpolation = async () => {
     y = await func(0)
     y = JSON.parse(y)
     y = y[2]
-    // console.log(y)
+    console.log(y)
 }
 
 // dibuja a cada momento
@@ -36,12 +36,12 @@ const draw = async() => {
         px = y[py]
         // console.log(y[py], py)
         ctx.drawImage(imgHand, phx, phy, 50, 50)
-        ctx.drawImage(imgCancha, -215, 340, 900, 200)
+        ctx.drawImage(imgCancha, -380, 640, 1500, 200)
     }
 }
 
 const clear = () => {
-    ctx.clearRect(0, 0, 500, 500)
+    ctx.clearRect(0, 0, 800, 800)
 }
 
 // hace el llamado asincrono al servidor y devuelve la funcion
@@ -70,7 +70,7 @@ const checkColission = () => {
         initInterpolation()
     }
     // gana la pc
-    if (py + 50 == 490) { 
+    if (py + 50 == 790) { 
         alert("Has perdido toca aceptar para reiniciar")
         restart()
         initInterpolation()
@@ -130,12 +130,12 @@ document.addEventListener("keydown", (e) => {
 // movimiento de mause
 document.addEventListener("mousemove", (e) => {
     if (phx > e.clientX) {
-        phx -= 10
+        phx -= 20
         stopMovHand()
         draw()
     }
     if (phx < e.clientX) {
-        phx += 10
+        phx += 20
         stopMovHand()
         draw()
     }
