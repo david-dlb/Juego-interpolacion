@@ -10,9 +10,12 @@
     <title>Document</title>
 </head>
 <body>
-    <img src="static/images.jpeg" width="100" height="1" alt="">
-
-    <div style="display: flex;"> 
+    <img src="static/images.jpeg" style="position: absolute;margin: 0px; width: 100%; height: 100vh; z-index: -1;" alt="">
+    <audio id="player">
+        <source id="source" src="static/3.mp3">
+        Audio no soportado
+    </audio>
+    <div style="display: fixed;"> 
         <div style="justify-content: center;">
 
         <canvas id="game" width="500" height="500" style="justify-content: center; background-color: rgba(0, 0, 0, 0.383);"></canvas>

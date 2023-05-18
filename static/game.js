@@ -4,6 +4,9 @@ let imgPelota = new Image()
 imgPelota.src = "static/pelota.png"
 let imgHand = new Image()
 imgHand.src = "static/guantes.png"
+let imgCancha = new Image()
+imgCancha.src = "static/porteria.png"
+songs = ["static/1.mp3", "static/2.mp3", "static/3.mp3", "static/4.mp3"]
 
 // por definicion del canvas y el juego tomamos a py como el eje x
 let px = 0
@@ -25,14 +28,15 @@ const initInterpolation = async () => {
     // console.log(y)
 }
 
+// dibuja a cada momento
 const draw = async() => {
     if (canvas.getContext) {
         clear()
         ctx.drawImage(imgPelota, y[py], py, 50, 50)
         px = y[py]
-        console.log(y[py], py)
+        // console.log(y[py], py)
         ctx.drawImage(imgHand, phx, phy, 50, 50)
-        ctx.drawLine
+        ctx.drawImage(imgCancha, -215, 340, 900, 200)
     }
 }
 
@@ -40,6 +44,7 @@ const clear = () => {
     ctx.clearRect(0, 0, 500, 500)
 }
 
+// hace el llamado asincrono al servidor y devuelve la funcion
 const func = async (x) => {
     const response = await fetch(`/move`, {
         method: 'POST',
@@ -48,12 +53,12 @@ const func = async (x) => {
     return await response.json();
 }
 
-
+// establece los frame
 setInterval(() => {
-    py += 1
+    py += 2
     draw()
     checkColission()
-}, 10)
+}, 1)
 
 const checkColission = () => {
     // si gana el jugador
@@ -77,12 +82,10 @@ const restart = () => {
     px = 0
     py = 0
     pw = 0
-    ph = 0 
-    // posicion de las manos
-    phx = 250
-    phy = 400
+    ph = 0  
 }
 
+// evita que las manos se vayan de la pantalla
 const stopMovHand = () => {
     if (phx == 450) {
         phx -= 10
@@ -92,20 +95,48 @@ const stopMovHand = () => {
     }
 }
 
+// carga la cancion aleatoria
+const loadSong = () => {
+    rand = Math.random()*4
+    rand = parseInt(rand)
+    console.log(rand)
+    const source = document.getElementById('source')
+	const currentPlay = document.getElementById('currentPlay')
+ 
+	source.src = songs[rand]
+	player.load()
+    player.play()
+}
+
+// alert("El juego esta apunto de comenzar. Para comenzar pulse aceptar.")
+initInterpolation()
+let isLoadSong = false
+
+// para activar la musica
+document.addEventListener("click", () => {
+    if (isLoadSong) {
+        return
+    }
+    loadSong()
+})
 document.addEventListener("keydown", (e) => {
-    key = e.key
-    e.preventDefault() 
-    if (key == "ArrowLeft") {
+    if (e.key != " ") {
+        return
+    }
+    loadSong()
+    isLoadSong = true
+})
+
+// movimiento de mause
+document.addEventListener("mousemove", (e) => {
+    if (phx > e.clientX) {
         phx -= 10
         stopMovHand()
         draw()
     }
-    if (key == "ArrowRight") {
+    if (phx < e.clientX) {
         phx += 10
         stopMovHand()
         draw()
     }
 })
-
-// alert("El juego esta apunto de comenzar. Para comenzar pulse aceptar.")
-initInterpolation()

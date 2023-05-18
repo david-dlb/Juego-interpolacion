@@ -1,35 +1,4 @@
-* {
-    font-family: 'Oswald'; 
-}
-
-.nivel {
-    
-    height: 150px;
-    
-}
-.container {
-    
-    padding: 130px;
-    display: flex;
-    font-size: 9vh;
-    font-family: 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    transition-timing-function: ease;
-    }
-
 body {
-    background-image: url("cancha.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
 }
-
-.container2 {
-    grid-template-areas:
-    "pelota" "espacio" "espacio" "guantes" ;
-    
-    
-   
-}
-
-
- 
- 
