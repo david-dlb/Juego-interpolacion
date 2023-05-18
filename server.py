@@ -1,11 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 from flask import send_file
-from scipy import interpolate
+from scipy import interpolate 
 import json
-import pandas as pd
-import numpy 
 import random
+import pandas as pd
+import numpy  
 
 app = Flask(__name__)
 api = Api(app)
@@ -26,15 +26,35 @@ def op3():
     y = [5, 8,22,30,10,47, 300, 200, 240]
     sprep = interpolate.splrep(x,y,s=0)
     return sprep
+def op4():
+    x = [2, 10, 15,19,50,90, 150, 380, 420]
+    y = [10, 32,56,56,10,47, 100, 140, 280]
+    sprep = interpolate.splrep(x,y,s=0)
+    return sprep
+def op5():
+    x = [2, 10, 15,19,50,90, 150, 380, 420]
+    y = [10, 12,36,36,60,47, 140, 40, 180]
+    sprep = interpolate.splrep(x,y,s=0)
+    return sprep
+def op6():
+    x = [2, 10, 15,19,50,90, 150, 380, 420]
+    y = [10, 12,36,36,60,47, 140, 160, 280]
+    sprep = interpolate.splrep(x,y,s=0)
+    return sprep
+def op7():
+    x = [2, 10, 15,19,50,170, 230, 380, 420]
+    y = [10, 12,36,36,60,47, 140, 160, 280]
+    sprep = interpolate.splrep(x,y,s=0)
+    return sprep
 # lista de opciones
-l = [op1, op2, op3]
+l = [op7]
 
 class Move(Resource):
     def get(self): 
         return "ddddd"
     def post(self):
         # genera una opcion aleatoria
-        sprep = l[int(random.randrange(0, 3))]()
+        sprep = l[int(random.randrange(0, len(l)))]()
  
         # genera todo el grafico
         xint1 = []
