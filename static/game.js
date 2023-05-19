@@ -64,7 +64,7 @@ const checkColission = () => {
     // si gana el jugador
     posL = -phx  + (px + 50)
     posR = (phx + 50) - px
-    if (py + 50 == phy && ((posL > 0 && posL < 50) || (posR > 0 && posR < 50))) {
+    if (py + 40 == phy && ((posL > 0 && posL < 50) || (posR > 0 && posR < 50))) {
         alert("Has ganado toca aceptar para reiniciar")
         restart()
         initInterpolation()
